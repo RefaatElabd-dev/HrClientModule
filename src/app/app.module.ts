@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,8 @@ import { StudentEditComponent } from './student/student-edit/student-edit.compon
 import { StudentDetailsComponent } from './student/student-details/student-details.component';
 import { HeaderComponent } from './header/header.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
+import { setConfig } from './Shared/Helpers/apiHelper';
+import { SharedValueService } from './Shared/Services/shared-value.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,13 @@ import { StudentListComponent } from './student/student-list/student-list.compon
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setConfig,
+      multi: true,
+      deps: [SharedValueService, HttpClient],
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

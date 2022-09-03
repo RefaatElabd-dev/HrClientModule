@@ -1,36 +1,30 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="bg-primary" style="cursor: pointer;">
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr class="bg-success" style="cursor: pointer;">
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr class="bg-danger" style="cursor: pointer;">
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="table-responsive-xl">
+    <table class="table">
+        <thead>
+            <tr class="bg-info text-primary">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>DOB</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-primary"
+                style="cursor: pointer;"
+                *ngFor="let student of studentList">
+                <th scope="row">{{student.id}}</th>
+                <td>{{student.name}}</td>
+                <td>{{student.address}}</td>
+                <td>{{student.birthDate | date: 'M/d/yy'}}</td>
+                <td>{{student.emailAddress}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-  <hr>
-  <div class="row">
+<hr>
+<div class="row">
     <div class="col-xs-12 offset-md-4">
         <button class="btn btn-success btn-lg" (click)="onAddStudent()">New Recipe</button>
     </div>
