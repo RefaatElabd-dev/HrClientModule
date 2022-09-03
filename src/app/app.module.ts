@@ -14,6 +14,8 @@ import { SubjectDetailsComponent } from './subject/subject-details-component/sub
 import { StudentStartComponent } from './student/student-start/student-start.component';
 import { StudentEditComponent } from './student/student-edit/student-edit.component';
 import { StudentDetailsComponent } from './student/student-details/student-details.component';
+import { HeaderComponent } from './header/header.component';
+import { StudentListComponent } from './student/student-list/student-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { StudentDetailsComponent } from './student/student-details/student-detai
     SubjectDetailsComponent,
     StudentStartComponent,
     StudentEditComponent,
-    StudentDetailsComponent
+    StudentDetailsComponent,
+    HeaderComponent,
+    StudentListComponent
   ],
   imports: [
     BrowserModule,
