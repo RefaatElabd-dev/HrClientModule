@@ -21,13 +21,12 @@ private subjectSubscription!: Subscription;
 subjectList!: SubjectDTO[];
 
 ngOnInit(): void {
-this.subjectSubscription = this.subjectService.subjectListChanged.subscribe((subjects) =>{
-this.subjectList = subjects;
-console.table(this.subjectList);
-} 
-);
-this.subjectService.UpdateSubjectList();
-this.subjectList = this.subjectService.getSubjectList();
+    this.subjectSubscription = this.subjectService.subjectListChanged.subscribe((subjects) =>{
+        this.subjectList = subjects;
+        console.table(this.subjectList);
+      });
+    this.subjectService.UpdateSubjectList();
+    this.subjectList = this.subjectService.getSubjectList();
 }
 
 onAddSubject(){

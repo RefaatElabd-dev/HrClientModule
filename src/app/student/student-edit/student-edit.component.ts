@@ -1,24 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { StudentDTO } from 'src/app/Shared/DTOs/StudentDTO';
+import { SubjectDTO } from 'src/app/Shared/DTOs/SubjectDTO';
 import { StudentService } from '../Student.Service';
+import { SubjectService } from './../../subject/Subject.Service';
 
 @Component({
   selector: 'app-student-edit',
   templateUrl: './student-edit.component.html',
   styleUrls: ['./student-edit.component.css']
 })
-export class StudentEditComponent implements OnInit {
+export class StudentEditComponent implements OnInit, OnDestroy {
   id!:number;
   editMode:boolean = false;
-  studentForm!: FormGroup;
+  studentForm: FormGroup = new FormGroup({});
+  private subjectSubscription!: Subscription;
 
+  subjectList!: SubjectDTO[];
   constructor(private route:ActivatedRoute, 
               private router: Router,
-              private studentService: StudentService) { }
+              private studentService: StudentService,
+              private subjectService: SubjectService) { }
 
   ngOnInit(): void {
+  this.subjectSubscription = this.subjectService.subjectListChanged.subscribe((subjects) =>{
+    this.subjectList = subjects;
+    console.log(subjects)
+  });
+
+  this.subjectService.UpdateSubjectList();
+  this.subjectList = this.subjectService.getSubjectList();
     this.route.params.subscribe( (params) => {
       this.id = +params["id"];
       this.editMode = params["id"] != null;
@@ -41,48 +54,51 @@ export class StudentEditComponent implements OnInit {
 
   formInit(){
     let name = '';
-    let imagePath = '';
-    let description = '';
-    let studentIngrediants: any = new FormArray([]);
+    let address = '';
+    let emailAddress = '';
+    // let birthDate: Date = new Date();
+    let studentSubjects: any = new FormArray([]);
 
     if(this.editMode){
       let student: StudentDTO = this.studentService.getStudentOf(this.id);
       name = student.name;
-      // imagePath = student.imagePath;
-      // description = student.description;
-      // if(student['ingrediants']){
-      //   for(let ingrediant of student.ingrediants){
-      //     studentIngrediants.push(
-      //       new FormGroup({
-      //         'name': new FormControl(ingrediant.name, Validators.required),
-      //         'amount': new FormControl(ingrediant.amount, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
-      //         }));
-        // }
-      // }
+      address = student.address;
+      emailAddress = student.emailAddress;
+      // birthDate = new Date(student.birthDate);
+    }
+    for(let subject of this.subjectList){
+      studentSubjects.push(
+        new FormGroup({
+          'name': new FormControl(subject.name, null),
+          }));
     }
 
     this.studentForm = new FormGroup({
       'name': new FormControl(name, Validators.required),
-      'imagePath': new FormControl(imagePath, Validators.required),
-      'description': new FormControl(description, Validators.required),
-      'ingrediants': studentIngrediants
+      'address': new FormControl(address, Validators.required),
+      'emailAddress': new FormControl(emailAddress, Validators.required),
+      // 'birthDate': new FormControl(birthDate, Validators.required),
+      'Subjects': studentSubjects
     });
   }
 
   onAddIngredian(){
-    (<FormArray> this.studentForm.get('ingrediants')).push(
+    (<FormArray> this.studentForm.get('Subjects')).push(
       new FormGroup({
-        'name': new FormControl(null, Validators.required),
-        'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
-      })
+        'name': new FormControl(null, null),
+        })
     );
   }
 
-  getIngrediantsControls() {
-    return (this.studentForm.get('ingrediants') as FormArray).controls;
+  getSubjectsControls() {
+    return (this.studentForm.get('Subjects') as FormArray).controls;
   }
 
   onDeleteIngrediant(index: number){
-    (<FormArray>this.studentForm.get('ingrediants')).removeAt(index);
+    (<FormArray>this.studentForm.get('Subjects')).removeAt(index);
+  }
+
+  ngOnDestroy(): void {
+    this.subjectSubscription.unsubscribe();
   }
 }
