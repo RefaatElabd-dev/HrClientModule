@@ -1,1 +1,17 @@
-<p>subject-details-component works!</p>
+<div class="col mb-4 border border-primary p-2">
+    <div class="row mt-3">
+        <div class="col-12">
+            <strong>Subject ID: </strong> {{subject.id}}
+            <br>
+            <strong>Subject Name: </strong> {{subject.name}}
+        </div>
+    </div>
+    <div class="row mt-3">
+        <button class="btn btn-warning offset-2 col-4" type="button" (click)="onEditSubject()" >
+            Edit
+        </button>
+        <button class="btn btn-danger offset-1 col-4" type="button" (click)="onDelete()" >
+            Delete
+        </button>
+    </div>
+</div>

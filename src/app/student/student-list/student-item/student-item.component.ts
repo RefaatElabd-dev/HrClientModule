@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { StudentDTO } from 'src/app/Shared/DTOs/StudentDTO';
 
 @Component({
   selector: 'app-student-item',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-item.component.css']
 })
 export class StudentItemComponent implements OnInit {
-
+  @Input() student!: StudentDTO;
   constructor() { }
 
   ngOnInit(): void {

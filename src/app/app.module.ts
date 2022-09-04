@@ -18,6 +18,8 @@ import { HeaderComponent } from './header/header.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { setConfig } from './Shared/Helpers/apiHelper';
 import { SharedValueService } from './Shared/Services/shared-value.service';
+import { StudentItemComponent } from './student/student-list/student-item/student-item.component';
+import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { SharedValueService } from './Shared/Services/shared-value.service';
     StudentEditComponent,
     StudentDetailsComponent,
     HeaderComponent,
-    StudentListComponent
+    StudentListComponent,
+    StudentItemComponent,
+    SubjectListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,31 +1,38 @@
 <div class="table-responsive-xl">
     <table class="table">
         <thead>
-            <tr class="bg-info text-primary">
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>DOB</th>
-                <th>Email</th>
+            <tr class="bg-warning text-primary">
+                <th class="text-center" class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Address</th>
+                <th class="text-center">DOB</th>
+                <th class="text-center">Email</th>
             </tr>
         </thead>
-        <tbody>
-            <tr class="bg-primary"
-                style="cursor: pointer;"
-                *ngFor="let student of studentList">
-                <th scope="row">{{student.id}}</th>
-                <td>{{student.name}}</td>
-                <td>{{student.address}}</td>
-                <td>{{student.birthDate | date: 'M/d/yy'}}</td>
-                <td>{{student.emailAddress}}</td>
-            </tr>
+        <tbody *ngFor="let student of studentList">
+                <tr style="cursor: pointer;"
+                    (click)="OnSelectStudent(student.id)">
+                    <th class="text-center">{{student.id}}</th>
+                    <td class="text-center">{{student.name}}</td>
+                    <td class="text-center">{{student.address}}</td>
+                    <td class="text-center">{{student.birthDate | date: 'M/d/yy'}}</td>
+                    <td class="text-center">{{student.emailAddress}}</td>
+                </tr>
         </tbody>
     </table>
 </div>
-
+<hr>
+<div class="row">
+    <button class="btn btn-dark offset-1 col-4" type="button" (click)="OnSelectPage('prev')">
+        Prev Page
+    </button>
+    <button class="btn btn-dark offset-2 col-4" type="button" (click)="OnSelectPage('next')">
+        Next Page
+    </button>
+</div>
 <hr>
 <div class="row">
     <div class="col-xs-12 offset-md-4">
-        <button class="btn btn-success btn-lg" (click)="onAddStudent()">New Recipe</button>
+        <button class="btn btn-success btn-lg" (click)="onAddStudent()">Add Student</button>
     </div>
 </div>

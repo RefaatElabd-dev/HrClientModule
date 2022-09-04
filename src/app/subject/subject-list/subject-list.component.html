@@ -1,0 +1,26 @@
+<div class="table-responsive-xl">
+    <table class="table">
+        <thead>
+            <tr class="bg-warning text-primary">
+                <th class="text-center" class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Class Name</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let subject of subjectList">
+                <tr style="cursor: pointer;"
+                    (click)="OnSelectSubject(subject.id)">
+                    <th class="text-center">{{subject.id}}</th>
+                    <td class="text-center">{{subject.name}}</td>
+                    <td class="text-center">{{subject.subjectClass.name}}</td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-xs-12 offset-md-4">
+        <button class="btn btn-success btn-lg" (click)="onAddSubject()">Add Subject</button>
+    </div>
+</div>

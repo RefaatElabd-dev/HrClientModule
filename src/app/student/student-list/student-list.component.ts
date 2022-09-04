@@ -26,12 +26,25 @@ export class StudentListComponent implements OnInit, OnDestroy {
         console.table(this.studentList);
       } 
     );
-    this.studentService.UpdateStudentList();
+    this.studentService.UpdateStudentList(this.studentService.searchDTO);
     this.studentList = this.studentService.getStudentList();
   }
 
   onAddStudent(){
     this.router.navigate(["new"], {relativeTo: this.route})
+  }
+
+  OnSelectStudent(id: number){
+    this.router.navigate([id], {relativeTo: this.route})
+  }
+
+  OnSelectPage(page: string){
+    if(page === 'prev'){
+      this.studentService.getPrevPage();
+    }
+    else{
+      this.studentService.getNextPage();
+    }
   }
 
   ngOnDestroy(): void {

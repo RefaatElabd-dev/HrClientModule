@@ -1,1 +1,33 @@
-<p>student-details works!</p>
+<div class="col mb-4">
+    <div class="card">
+        <img src="https://thumbs.dreamstime.com/b/businessman-icon-image-male-avatar-profile-vector-glasses-beard-hairstyle-179728610.jpg"
+            class="card-img-top" alt="Student Image">
+        <div class="card-body">
+            <h5 class="card-title">{{ student.name }}</h5>
+            <div class="row">
+                <div class="offset-1 col-11">
+                    <strong class="m-2">Address: </strong> {{student.address}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-1 col-11">
+                    <strong class="m-2">Birth Date: </strong> {{student.birthDate | date: 'M/d/yy'}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-1 col-11">
+                    <strong class="m-2">Email: </strong> {{student.emailAddress}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <button class="btn btn-warning offset-2 col-4" type="button" (click)="onEditStudent()" >
+                    Edit
+                </button>
+                <button class="btn btn-danger offset-1 col-4" type="button" (click)="onDelete()" >
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
