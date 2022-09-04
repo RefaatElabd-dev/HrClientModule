@@ -1,4 +1,4 @@
-import { SubjectDTO } from "./SubjectDTO";
+import { StudentSubjects } from "./StudentSubjectsDTO";
 
 export class StudentDTO {
     constructor(public id: number,
@@ -6,7 +6,5 @@ export class StudentDTO {
                 public address: string,
                 public birthDate: string,
                 public emailAddress: string,
-                public subjects: SubjectDTO[]){
-
-    }
+                public studentSubjects: StudentSubjects[]){ }
 }

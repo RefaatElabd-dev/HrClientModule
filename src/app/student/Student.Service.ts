@@ -3,6 +3,8 @@ import { SearchDTO } from '../Shared/DTOs/SearchDTO';
 import { StudentDTO } from '../Shared/DTOs/StudentDTO';
 import { Observable, Subject } from "rxjs";
 import { StudentHttpService } from './StudentHttp.service';
+import { SubjectDTO } from 'src/app/Shared/DTOs/SubjectDTO';
+import { StudentSubjects } from "../Shared/DTOs/StudentSubjectsDTO";
 
 @Injectable({
     providedIn: 'root'
@@ -57,6 +59,10 @@ export class StudentService{
         )
     }
 
+    getStudentSubjects(studentId: number){
+        return this.studentHttpService.getStudentSubjects(studentId);
+    }
+
     getPrevPage() {
         if(this.searchDTO.skip == 0)return;
         
@@ -69,4 +75,12 @@ export class StudentService{
         this.searchDTO.skip += 10;
         this.UpdateStudentList(this.searchDTO);
       }
+
+    public addStudentSubject(studentSubject: StudentSubjects){
+        this.studentHttpService.addStudentSubject(studentSubject).subscribe();
+    }
+
+    public removeStudentSubject(studentSubject: StudentSubjects){
+        this.studentHttpService.removeStudentSubject(studentSubject).subscribe();
+    }
 }

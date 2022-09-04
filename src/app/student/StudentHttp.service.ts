@@ -5,6 +5,8 @@ import { SharedValueService } from "src/app/Shared/Services/shared-value.service
 import { SearchDTO } from '../Shared/DTOs/SearchDTO';
 import { StudentDTO } from '../Shared/DTOs/StudentDTO';
 import { Observable } from "rxjs";
+import { SubjectDTO } from "../Shared/DTOs/SubjectDTO";
+import { StudentSubjects } from "../Shared/DTOs/StudentSubjectsDTO";
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +22,12 @@ export class StudentHttpService{
         const uri: string = this.baseUri + '/GetStudentsPage';
         return this.http.get<StudentDTO[]>(uri, { params: {...searchDTO} });
     }
+
+    public getStudentSubjects(studentId: number): Observable<SubjectDTO[]>{
+        const uri: string = this.baseUri + '/GetStudentSubjects';
+        return this.http.get<SubjectDTO[]>(uri, { params: {"studentId": studentId} });
+    }
+    
 
     public addStudent(student: StudentDTO): Observable<any>{
         const uri: string = this.baseUri;
@@ -38,4 +46,13 @@ export class StudentHttpService{
         });
     }
 
+    public addStudentSubject(studentSubject: StudentSubjects): Observable<any>{
+        const uri: string = this.baseUri + "/AddStudentSubject";
+        return this.http.patch(uri, studentSubject);
+    }
+
+    public removeStudentSubject(studentSubject: StudentSubjects): Observable<any>{
+        const uri: string = this.baseUri + "/RemoveStudentSubject";;
+        return this.http.patch(uri, studentSubject);
+    }
 }
