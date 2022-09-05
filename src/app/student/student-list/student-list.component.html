@@ -1,3 +1,28 @@
+<form (ngSubmit)="onSearchSubmit(f)" #f="ngForm">
+    <div class="row border border-primary pt-2 mb-2">
+        <div class=" col-4 form-group text-center">
+            <input type="text"
+                   id="name" 
+                   class="form-control" 
+                   name="name" 
+                   ngModel 
+                   placeholder="Student Name">
+        </div>
+        <div class="col-5" ngModelGroup="subjectClass">
+            <select class="form-control form-control" name="subjectId" ngModel  >
+                <option *ngFor="let class of subjectClassesList"
+                        [value]="class.subjectID"
+                        >{{ class.name }}
+                </option>
+            </select>
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-primary" style="margin-left: 10px;" [disabled]="!f.valid">
+                Search </button>
+        </div>
+    </div>
+</form>
+
 <div class="table-responsive-xl">
     <table class="table">
         <thead>
@@ -10,14 +35,13 @@
             </tr>
         </thead>
         <tbody *ngFor="let student of studentList">
-                <tr style="cursor: pointer;"
-                    (click)="OnSelectStudent(student.id)">
-                    <th class="text-center">{{student.id}}</th>
-                    <td class="text-center">{{student.name}}</td>
-                    <td class="text-center">{{student.address}}</td>
-                    <td class="text-center">{{student.birthDate | date: 'M/d/yy'}}</td>
-                    <td class="text-center">{{student.emailAddress}}</td>
-                </tr>
+            <tr style="cursor: pointer;" (click)="OnSelectStudent(student.id)">
+                <th class="text-center">{{student.id}}</th>
+                <td class="text-center">{{student.name}}</td>
+                <td class="text-center">{{student.address}}</td>
+                <td class="text-center">{{student.birthDate | date: 'M/d/yy'}}</td>
+                <td class="text-center">{{student.emailAddress}}</td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
+
+import { ClassDTO } from "../Shared/DTOs/CLassDTO";
 import { SubjectDTO } from "../Shared/DTOs/SubjectDTO";
 import { SubjectHttpService } from "./SubjectHttp.Service";
 
@@ -50,5 +52,9 @@ export class SubjectService{
                 this.UpdateSubjectList();
             }
         )
+    }
+
+    public getAllClasses(): Observable<ClassDTO[]>{
+        return this.subjectHttpService.getAllClasses();
     }
 }

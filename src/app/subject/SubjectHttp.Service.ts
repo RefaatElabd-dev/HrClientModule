@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { SharedValueService } from "src/app/Shared/Services/shared-value.service";
 import { Observable } from "rxjs";
 import { SubjectDTO } from "../Shared/DTOs/SubjectDTO";
+import { ClassDTO } from "../Shared/DTOs/CLassDTO";
 
 @Injectable({
     providedIn: 'root'
@@ -37,4 +38,8 @@ export class SubjectHttpService{
         });
     }
 
+    public getAllClasses(): Observable<ClassDTO[]>{
+        const uri = this.baseApi + '/Class/GetAllClasses';
+        return this.http.get<ClassDTO[]>(uri);
+    }
 }

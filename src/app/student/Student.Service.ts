@@ -12,7 +12,7 @@ import { StudentSubjects } from "../Shared/DTOs/StudentSubjectsDTO";
 export class StudentService{
    
     constructor(private studentHttpService: StudentHttpService){
-        this.searchDTO = new SearchDTO(0, 10)
+        this.searchDTO = new SearchDTO(0, 10, 0, '')
 
     }
 
